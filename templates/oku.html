@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+	span {
+		font-size: 10px;
+	}
+	</style>
+	</head>
+	<body>
+		<header>
+			<a href="/tumu">Tüm Başlıklar</a> | <a href="/rastgele">Rastgele Başlık</a>
+			<form action="/ara" method="post">
+				<input type="text" name="arama" placeholder="baslik arama">
+				<input type="submit" value="ara">
+		</form>
+		<hr>
+		</header>
+		
+
+		<h3><a href="/read/{{ data[0] }}">{{ data[0] }}</a></h3>
+		<ol>
+		{% for values in icerik %}
+
+			<li>{{ values [2] }}</li><span><a href="/oku?id={{ values[0] }}">#{{values[0] }} | {{ values[3] }}</a></span>
+			
+			{% if session['user'] %}
+				<span><a href="/delete/{{ values[0] }}">delete</a> | <a href="/update/{{ values[0] }}">edit</a></span>
+			{% endif %}
+
+		{% endfor %}
+	</ol>
+	
+
+	
+
+	</body>
+
+
+	
+</html>
