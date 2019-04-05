@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+	span{
+		font-size: 10px;
+	}
+	</style>
+	</head>
+	<body>
+		<a href="/tumu">Tüm başlıklar</a> | <a href="/rastgele">Rastgele Başlık</a> | <a href="/logg">Login</a> 
+
+
+		<h2>arama</h2>
+		<form action="/ara" method="post">
+			<input type="text" name="arama" placeholder="baslik arama"><br>
+			<input type="submit" value="ara">
+		</form>
+
+		
+		{% if session['user'] %}
+			<hr>
+			<form action='/create' method='post'>
+				Başlık:<input type="text" name="baslik"><br>
+				İçerik:<textarea name="icerik"  rows="20" cols="100"></textarea><br>
+				<input type="submit" value="ekle">
+			</form>
+		{% endif %}
+		<hr>
+
+<!-- burada tum baslik ve entryleri cekiyor  biz bunu istemiyoruz aslinda - o yuzden ona gore bi query vericez oteki taraftan.
+		<h3>----</h3>
+		<ol>
+		{% for data in icerik %}
+			<h3>{{ data[1] }}
+			<li>{{ data[2] }}</li><span><a href="/delete/{{ data[0] }}">delete</a> | <a href="/update/{{ data[0] }}">edit</a></span>
+		{% endfor %}
+	</ol>
+
+-->
+
+	
+
+	</body>
+
+
+	
+</html>

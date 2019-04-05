@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Badisozluk - {{ data }}</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/blog-post.css" rel="stylesheet">
+
+  <style>
+  span {
+    font-size: 10px;
+    float: right;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Bilgi Merkezi</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/tumu">Tüm Başlıklar
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            
+            {% if session['user'] %}
+           		<a class="nav-link" href="/logout">Logout</a>
+           	{% else %}
+           		<a class="nav-link" href="/logg">Login</a>
+           	{% endif %}	
+        	
+        	</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4">
+        <a href="/read/{{ data }}"> {{ data }}</a>
+      </h1>
+
+        <hr>
+
+        <!-- Post Content -->
+       
+        {% for values in icerik %}
+          
+        <p class="lead">
+          
+          {{ values [2]|safe}}
+
+        </p>
+
+
+        <span>
+          <a href="/oku?id={{ values[0] }}">
+
+            #{{values[0] }} | {{ values[3] }}
+
+          </a>
+          
+        
+
+        
+
+        {% if session['user'] %}
+          ----- <a href="/delete/{{ values[0] }}">delete</a> | <a href="/update/{{ values[0] }}">edit</a></span>
+        {% endif %}
+        <br><br>
+      {% endfor %}
+
+
+
+        
+        <hr>
+
+
+        {% if session['user'] %}
+        <!-- Comments Form -->
+        <div class="card my-4">
+
+          <h5 class="card-header">Yaz Bakalım:</h5>
+          <div class="card-body">
+            <form action="/create" method="post">
+            	<input type="hidden" name="baslik" value="{{ data }}"><br>
+              <div class="form-group">
+                <textarea name="icerik" class="form-control" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Ekle</button>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+       
+        
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Search Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Başlık Ara</h5>
+          <div class="card-body">
+            <div class="input-group">
+            	<form action="/ara" method="post">
+              <input type="text" name="arama" class="form-control" placeholder="Aradığınız başlığı girin..">
+              <span class="input-group-btn">
+                <button class="btn btn-secondary" type="submit">Bul!</button>
+                </form>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Categories Widget -->
+        <!--
+        <div class="card my-4">
+          <h5 class="card-header">Başlıklar</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#">Web Design</a>
+                  </li>
+                  <li>
+                    <a href="#">HTML</a>
+                  </li>
+                  <li>
+                    <a href="#">Freebies</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#">JavaScript</a>
+                  </li>
+                  <li>
+                    <a href="#">CSS</a>
+                  </li>
+                  <li>
+                    <a href="#">Tutorials</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    -->
+
+        
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-3 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">badisozluk - built with flask</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
