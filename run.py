@@ -6,7 +6,6 @@ import sqlite3
 import datetime
 import os
 import random
-import markdown2
 import re
 
 ##burasi hacky. py3 de gerekmiyor ve bu da onerilmiyor
